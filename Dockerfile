@@ -6,8 +6,9 @@ RUN ln -s /usr/bin/* /usr/sbin/ -f
 
 RUN mkdir moemoekyun
 WORKDIR /moemoekyun
-COPY . .
-RUN chmod -R 774 *
+COPY ./main.py /moemoekyun/main.py
+#COPY . .
+#RUN chmod -R 774 *
 
 RUN apt update
 RUN apt upgrade -y
@@ -20,7 +21,7 @@ ENV TZ=Asia/Seoul
 
 RUN apt install python3-pip -y
 
-RUN python3 ./setup.py install
+RUN pip3 install hcskr
 
 ENV NAME=홍길동
 ENV BIRTH=010101
