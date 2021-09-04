@@ -52,7 +52,7 @@ def userlogin(
 ):
     return loop.run_until_complete(
         asyncUserLogin(
-            name, birth, area, schoolname, level, password, aiohttp.ClientSession()
+            name, birth, area, schoolname, level, password, aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False))
         )
     )
 
@@ -84,7 +84,7 @@ async def asyncSelfCheck(
     password: str,
     customloginname: str = None,
 ):
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
         if customloginname is None:
             customloginname = name
 
@@ -173,7 +173,7 @@ async def asyncChangePassword(
     password: str,
     newpassword: str,
 ):
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
         login_result = await asyncUserLogin(
             name, birth, area, schoolname, level, password, session
         )
@@ -277,7 +277,7 @@ async def asyncUserLogin(
     try:
         mtk = mTransKey("https://hcs.eduro.go.kr/transkeyServlet")
         pw_pad = await mtk.new_keypad("number", "password", "password", "password")
-        encrypted = pw_pad.encrypt_password(password, mtk.decInitTime)
+        encrypted = pw_pad.encrypt_password(password)
         hm = mtk.hmac_digest(encrypted.encode())
 
         res = await send_hcsreq(
@@ -298,7 +298,7 @@ async def asyncUserLogin(
                                 "enc": encrypted,
                                 "hmac": hm,
                                 "keyboardType": "number",
-                                "keyIndex": mtk.crypto.rsa_encrypt(b"32"),
+                                "keyIndex": mtk.keyIndex,
                                 "fieldType": "password",
                                 "seedKey": mtk.crypto.get_encrypted_key(),
                                 "initTime": mtk.initTime,
@@ -323,11 +323,11 @@ async def asyncUserLogin(
 
         token = res
 
-    except Exception:
+    except Exception as e:
         return {
             "error": True,
             "code": "UNKNOWN",
-            "message": "validatePassword: 알 수 없는 에러 발생.",
+            "message": f"validatePassword: 알 수 없는 에러 발생. {e}",
         }
 
     try:
@@ -352,7 +352,7 @@ async def asyncUserLogin(
 async def asyncGenerateToken(
     name: str, birth: str, area: str, schoolname: str, level: str, password: str
 ):
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
         login_result = await asyncUserLogin(**locals())
 
         if login_result["error"]:
