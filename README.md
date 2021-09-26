@@ -3,12 +3,14 @@
 [![Send mail](https://img.shields.io/badge/-hisky%40mchan.us-blue?style=flat-square&logo=gmail&logoColor=white&link=mailto:hisky@mchan.us)](mailto:hisky@mchan.us) [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/hiskyzen/autohcs/latest?style=flat-square)](https://hub.docker.com/r/hiskyzen/autohcs) [![GitHub license](https://img.shields.io/github/license/hiskyzen/autohealthcheck-docker?style=flat-square)](https://github.com/HiSkyZen/autohealthcheck-docker/blob/main/LICENSE) <br>
 파이썬용 학생 코로나 자가진단 라이브러리 HCSKR을 도커화시켰습니다. <br>
 
-AMD64 아키텍쳐와 ARM64 아키텍쳐를 지원합니다.<br>
+x86_64(64비트) 아키텍쳐와 ARMv8(aarch64) 아키텍쳐를 지원합니다.<br>
 x86(32비트)와 ARMv6, ARMv7 아키텍쳐는 지원하지 않습니다.
 
 보안성은 장담하지 못합니다. 매우 송구스럽습니다.
 
-이 브랜치는 pip를 사용하지 않고 setup.py를 사용하여 HCSKR을 직접 설치합니다. 보통 릴리즈보다 최신코드가 필요할 때 사용합니다.
+이 브랜치는 pip를 사용하지 않고 setup.py를 사용하여 HCSKR을 직접 설치합니다.
+
+원본 리포지토리는 폭파되었으나 직접 설치 방식의 특성상 2021년 9월 26일 기준 정상 동작합니다.
 
 ## 사용법
 
