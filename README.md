@@ -1,6 +1,9 @@
 # Auto Health Check Docker Image
 
 [![Send mail](https://img.shields.io/badge/-hisky%40mchan.us-blue?style=flat-square&logo=gmail&logoColor=white&link=mailto:hisky@mchan.us)](mailto:hisky@mchan.us) [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/hiskyzen/autohcs/latest?style=flat-square)](https://hub.docker.com/r/hiskyzen/autohcs) [![GitHub license](https://img.shields.io/github/license/hiskyzen/autohealthcheck-docker?style=flat-square)](https://github.com/HiSkyZen/autohealthcheck-docker/blob/main/LICENSE) <br>
+
+ * 더이상 유지관리 되지 않습니다. 2022년 1월 31일 기준 정상 작동 확인되었습니다.
+
 파이썬용 학생 코로나 자가진단 라이브러리 HCSKR을 도커화시켰습니다. <br>
 
 x86_64(64비트) 아키텍쳐와 ARMv8(aarch64) 아키텍쳐를 지원합니다.<br>
